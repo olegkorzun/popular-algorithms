@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <p> Alg 1 v1 First script all 2**n less then 1000 in two lines of code  v1 </p>
+    <p id='pow1'>Answer:</p>
+    <script>
+        for (let i = 1; 2 ** i < 1000; i++) {
+            document.getElementById("pow1").innerHTML += 2 ** i + ",";
+        }
+    </script>
+
+    <p> First script all 2**n less then 1000 in two lines of code V2</p>
+    <p id='pow2'>Answer:</p>
+    <script>
+        for (let i = 1; i < 1000; i*=2) {
+            document.getElementById("pow2").innerHTML += i + ",";
+        }
+    </script>
+
+    <p> First script prime numbers less then 1000 ver 1 </p>
+    <p id='pr1'>Answer:</p>
+    <script>
+        let breakCheck1;
+        for (let i = 2; i <= 1000; i++) {
+            breakCheck1 = false;
+            for (j = 2; j < i; j++) {
+                if (i % j == 0) {
+                    breakCheck1 = true;
+                    break;
+                }
+            } 
+            if (breakCheck1) {continue;}
+            document.getElementById("pr1").innerHTML += i + ",";
+        }
+    </script>
+
+    <p> Second script prime numbers less then 1000 ver 2 </p>
+    <p id='prime2'>Answer:</p>
+    <script>
+        nextP:
+        for (let n = 2; n <= 1000; n++) {
+            for (let x = 2; x < n; x++) {
+                if (n % x == 0) {
+                    continue  nextP;
+                }
+            }
+            document.getElementById("prime2").innerHTML += n + ",";
+        }
+    </script>
+
+    <p> Phone numbers</p>
+    <p id='phones'>Answer:</p>
+    <script>
+        let arrPesons = [
+            {
+	            name: { first: 'stav', last: 'rockah' },
+	            phone_numbers: ['000', '111']
+            },
+            {
+	            name: { first: 'gabi', last: 'lee' },
+	            phone_numbers: ['222', '333', '444']
+            },
+            {
+	            name: { first: 'daniel', last: 'cohen' }
+            }
+         ];
+        let person;
+        for (let l=0; l<arrPesons.length; l++) {
+            console.log(arrPesons[l]);
+            person = '<p>'+ arrPesons[l].name.first+' '+arrPesons[l].name.last;
+            if (arrPesons[l].phone_numbers) {
+                person += ' phone:'; 
+                for (let p=0; p<arrPesons[l].phone_numbers.length; p++) {
+                    person += (p+1) +':' +arrPesons[l].phone_numbers[p]+' ';
+                }
+            }
+            person += '</p>'; 
+            document.getElementById("phones").innerHTML += person;
+        }
+    </script>
+
+    <p> Salary of Company Recursion tree of sub departments</p>
+    <p id='tree'>Answer:</p>
+    <script>
+        let company = {
+            sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 600 }],
+            development: {
+            sites: [{name: 'Peter', salary: 2000}, {name: 'Alex', salary: 1800 }],
+            internals: [{name: 'Jack', salary: 1300}]
+            }
+        };
+        function sumSalaries(department) {
+            if (Array.isArray(department)) { 
+            return department.reduce((prev, current) => prev + current.salary, 0); 
+            } else { 
+            let sum = 0;
+            for (let subdep of Object.values(department)) {
+                sum += sumSalaries(subdep); 
+            }
+            return sum;
+            }
+        }
+        document.getElementById("tree").innerHTML += 'Salary = '+sumSalaries(company); 
+    </script>
+
+    <p> Factorial 12 recursion</p>
+    <p id='fact'>Answer:</p>
+    <script>
+        function factorial(n) {
+            if(n == 0) {
+                return 1
+            } else {
+                return n * factorial(n - 1);
+            }
+        }
+        document.getElementById("fact").innerHTML += factorial(12);
+    </script>
+
+    <p> Fibonacci recursion 5 12 20</p>
+    <p id='fib1'>Answer:</p>
+    <script>
+        function fibonacci(num) {
+            if (num <= 1) return 1;
+            return fibonacci(num - 1) + fibonacci(num - 2);
+        }
+        document.getElementById("fib1").innerHTML += '5 = '+fibonacci(5)+' 12 = '+fibonacci(12)+' 20 = ' + fibonacci(20);
+    </script>
+
+    <p> Fibonacci no recursion 10 20 44</p>
+    <p id='fib2'>Answer:</p>
+    <script>
+        function fib(n) {
+        let a = 1;
+        let b = 1;
+        for (let i = 3; i <= n; i++) {
+            let c = a + b;
+            a = b;
+            b = c;
+        }
+        return b;
+        }        
+        document.getElementById("fib2").innerHTML += '10 = '+fib(10)+' 44 = '+fib(44)+' 77 = ' + fib(77);
+    </script>
+
+    <p> Sort [123,765,66,87,15,99,9,51]</p>
+    <p id='sort1'>Answer:</p>
+    <script>
+        function sort1(arr) {
+            for (i = 0; i < arr.length-1; i++) {
+                for (j = i + 1; j < arr.length; j++) {
+                    if (arr[i] > arr[j]) {
+                        arr[i] = arr[i] + arr[j];
+                        arr[j] = arr[i] - arr[j];
+                        arr[i] = arr[i] - arr[j];
+                    }
+                }
+            }   
+        }
+        let array = [123,765,66,87,15,99,9,51];
+        sort1(array);
+        for (i=0; i<array.length; i++) {
+            document.getElementById("sort1").innerHTML += array[i]+'-';
+        }
+    </script>
+
+    <p> Real random digits 100 cycles</p>
+    <p id='ran'>Answer:</p>
+    <script>
+        function printRandom(callback) {
+            const ARR_SIZE = 100;
+            let cloneArr = new Array(ARR_SIZE);
+            let j;
+            for (i=0; i<ARR_SIZE; i++) {
+                j = Math.floor(Math.random() * Math.floor(ARR_SIZE));
+                if (cloneArr[j] !== j) { 
+                    document.getElementById("ran").innerHTML += j +',';
+                    cloneArr[j] = j;
+                }
+            }
+            callback(null);
+        }
+        printRandom ((res)=>{
+            if (res == null) {
+                document.getElementById("ran").innerHTML += 'End of Max Arr Size';
+            }
+        });
+    </script>
+
+    <p> Real random 10 Fisher–Yates shuffle alg</p>
+    <p id='rand'>Answer:</p>
+    <script>
+        function randArr (arr) {
+            let i = arr.length
+            while (i > 1) {
+                i = i - 1;
+                j = Math.floor(Math.random() * Math.floor(i));  // 0 <= j <= i-1
+                //change values arr[i] with arr[j]
+                arr[i] = array[i] + arr[j];
+                arr[j] = arr[i] - arr[j];
+                arr[i] = arr[i] - arr[j];
+            }
+        }
+        array = [0,1,2,3,4,5,6,7,8,9];
+        randArr (array);
+        for (i=0; i<array.length; i++) {
+            document.getElementById("rand").innerHTML += array[i]+'-';
+        }
+    </script>
+
+    <p> URL (Send request for 10 (n) URL's print in the list do noi wait)</p>
+    <p id="url">Result:</p>
+    <script>
+        function sendRequest(position) {
+            printA[position] = 'Answer from:'+position+',';
+            if (position == counter) {
+                document.getElementById("url").innerHTML += printA[counter];
+                counter ++;
+                while (counter<printA.length) {
+                    if (printA[counter] != '') {
+                        document.getElementById("url").innerHTML += printA[counter];
+                        counter++
+                    } else { break }
+                }
+            }
+        }
+        let printA = ['','','','','','','','','',''];
+        let counter = 0;
+        let URLarray = [0,1,2,3,4,5,6,7,8,9];
+        randArr(array); //get random
+        for (i=0; i<array.length; i++) { 
+            setTimeout(sendRequest, array[i]*1000,i); // send "URL request"
+        }
+    </script>
+
+</body>
+</html>
